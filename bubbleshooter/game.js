@@ -49,7 +49,7 @@
 
     ctx.beginPath();
 
-    ctx.rect(this.leftWallX + 10, (this.yDim - this.deadLineY), this.rightWallX - this.leftWallX - 20, (2 * (this.yDim - this.deadLineY)));
+    ctx.rect(this.leftWallX + 10, (this.yDim - 150 - 475) + 10, this.rightWallX - this.leftWallX - 20, 455);
 
     ctx.fillStyle = 'grey';
     ctx.fill();
@@ -57,13 +57,13 @@
 
     ctx.fillStyle = "blue";
     ctx.font = "bold 40px Arial";
-    ctx.fillText("Congratulations!", this.leftWallX + 185, 252);
+    ctx.fillText("Congratulations!", this.leftWallX + 185, this.yDim - 150 - 475 + 150);
 
     ctx.font = "bold 30px Arial";
-    ctx.fillText("You beat the game!", this.leftWallX + 210, 302);
+    ctx.fillText("You beat the game!", this.leftWallX + 210, (this.yDim - 150 - 475) + 270);
 
     ctx.font = "bold 20px Arial";
-    ctx.fillText("Press Enter to start over!", this.leftWallX + 225, 402);
+    ctx.fillText("Press Enter to start over!", this.leftWallX + 225, (this.yDim - 150 - 475) + 300);
 
     key('enter', function() {
       key.unbind('enter');
@@ -85,7 +85,8 @@
 
     ctx.beginPath();
 
-    ctx.rect(this.leftWallX + 10, this.topLine.y + 10, this.rightWallX - this.leftWallX - 20, this.deadLineY - this.topLine.y - 20);
+    this.yDim - 150 - 475
+    ctx.rect(this.leftWallX + 10, this.yDim - 150 - 465, this.rightWallX - this.leftWallX - 20, this.deadLineY - (this.yDim - 150 - 475) - 20);
 
     ctx.fillStyle = 'grey';
     ctx.fill();
@@ -93,10 +94,10 @@
 
     ctx.fillStyle = "blue";
     ctx.font = "bold 40px Arial";
-    ctx.fillText("Nice Job!", this.leftWallX + 260, this.topLine.y + 150);
+    ctx.fillText("Nice Job!", this.leftWallX + 260, (this.yDim - 150 - 475) + 150);
 
     ctx.font = "bold 20px Arial";
-    ctx.fillText("Press Enter when you're ready to move on to the next level.", this.leftWallX + 65, this.topLine.y + 300);
+    ctx.fillText("Press Enter when you're ready to move on to the next level.", this.leftWallX + 65, (this.yDim - 150 - 475) + 300);
 
     key('enter', function() {
       key.unbind('enter');
@@ -135,7 +136,7 @@
 
     ctx.beginPath();
 
-    ctx.rect(this.leftWallX + 10, this.topLine.y + 10, this.rightWallX - this.leftWallX - 20, this.deadLineY - this.topLine.y - 20);
+    ctx.rect(this.leftWallX + 10, (this.yDim - 150 - 475) + 10, this.rightWallX - this.leftWallX - 20, this.deadLineY - (this.yDim - 150 - 475) - 20);
 
     ctx.fillStyle = 'yellow';
     ctx.fill();
@@ -143,12 +144,12 @@
 
     ctx.fillStyle = "blue";
     ctx.font = "bold 40px Arial";
-    ctx.fillText("Welcome to my bubble shooter", this.leftWallX + 50, this.topLine.y + 150);
+    ctx.fillText("Welcome to my bubble shooter", this.leftWallX + 50, (this.yDim - 150 - 475) + 150);
 
     ctx.font = "bold 20px Arial";
-    ctx.fillText("Press A to fire", this.leftWallX + 260, this.topLine.y + 270);
+    ctx.fillText("Press A to fire", this.leftWallX + 260, (this.yDim - 150 - 475) + 270);
 
-    ctx.fillText("Press Enter to Begin", this.leftWallX + 230, this.topLine.y + 300);
+    ctx.fillText("Press Enter to Begin", this.leftWallX + 230, (this.yDim - 150 - 475) + 300);
 
     key('enter', function() {
       key.unbind('enter');
@@ -184,7 +185,7 @@
     //radius = 30
 
     this.level += 1;
-    this.topLine = {y: 102};
+    this.topLine = {y: this.yDim - 150 - 475};
     this.deadRow = 9;
 
     list = levels[this.level].board;
@@ -403,9 +404,9 @@
 
     ctx.rect(
       this.leftWallX + 10,
-      this.yDim - this.deadLineY,
+      (this.yDim - 150 - 475) + 10,
       this.rightWallX - this.leftWallX - 20,
-      2 * (this.yDim - this.deadLineY)
+      (2 * (this.yDim - this.deadLineY))
     );
 
     ctx.fillStyle = 'black';
@@ -414,11 +415,11 @@
 
     ctx.fillStyle = "White";
     ctx.font = "bold 40px Arial";
-    ctx.fillText("Game Over!", this.leftWallX + 250, this.topLine.y + 150);
+    ctx.fillText("Game Over!", this.leftWallX + 250, (this.yDim - 150 - 475) + 150);
 
     ctx.fillStyle = "White";
     ctx.font = "bold 20px Arial";
-    ctx.fillText("Press Enter to play again!", this.leftWallX + 240, this.topLine.y + 225);
+    ctx.fillText("Press Enter to play again!", this.leftWallX + 240, (this.yDim - 150 - 475) + 225);
 
     key('enter', function() {
       key.unbind('enter');
@@ -476,7 +477,6 @@
   }
 
   Game.prototype.addDeadLine = function() {
-    // warning: needs this.leftWallX and this.rightWallX defined.
     this.deadLineY = this.yDim - 150;
     var deadLine = {};
     deadLine.render = function(ctx) {
@@ -489,8 +489,7 @@
   }
 
   Game.prototype.addTopLine = function() {
-    this.topLine = {y: 102};
-    //var y = this.topLine.y;
+    this.topLine = {y: this.yDim - 150 - 475};
     this.topLine.render = function(ctx) {
       ctx.beginPath();
       ctx.moveTo(this.leftWallX, this.topLine.y);
